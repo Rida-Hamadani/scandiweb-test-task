@@ -1,0 +1,64 @@
+.header-container {
+
+    position: relative;
+    background-color: #FF8B13;
+    color: #FFF2F2;
+    display: flex;
+    min-height:50px;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+    z-index: 10;
+
+}
+
+.header-title {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 160%;
+
+}
+
+.header-buttons {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    
+}
+
+.header-buttons div {
+
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.header-buttons a {
+
+    height: 100%;
+
+}
+
+.header-buttons a button, button {
+
+    cursor: pointer;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: #FFF2F2;
+
+}
+
+.header-buttons button:hover {
+
+    background-color: #d87b19;
+
+}
