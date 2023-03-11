@@ -57,7 +57,7 @@ export class ProductList extends Component {
 
     });
 
-    await fetch('http://localhost:8888/products', {
+    await fetch('https://facecookwalter.000webhostapp.com/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -76,7 +76,7 @@ export class ProductList extends Component {
 
   fetchProducts = async () => {
 
-    const response = await fetch('http://localhost:8888/products');
+    const response = await fetch('https://facecookwalter.000webhostapp.com/products');
     const data = response.json();
 
     return data;
