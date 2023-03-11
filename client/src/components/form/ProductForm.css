@@ -1,0 +1,56 @@
+form {
+
+    padding-top: 2%;
+
+}
+
+.form-container {
+
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-center {
+
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+
+}
+
+.form-container label, .form-container input, .form-container select, .notification{
+
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.form-container label, .form-container p {
+
+  width: 20%;
+  text-align: right;
+  margin-right: 10px;
+
+}
+
+.form-container input, .form-container select {
+
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}
+
+.notification {
+
+  margin: 8px 0;
+  margin-left: 27%;
+  width: 40%;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}

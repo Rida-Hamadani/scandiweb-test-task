@@ -1,0 +1,22 @@
+.card {
+
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 200px;
+
+}
+
+.delete-btn {
+
+    padding: 5% 0 0 5%;
+
+}
+
+.description {
+
+    line-height : 5px;
+    text-align: center;
+
+}
