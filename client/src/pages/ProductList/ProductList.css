@@ -7,3 +7,14 @@
     background-color: #FFF2F2;
 
 }
+
+.list-body {
+
+    padding-top: 30px;
+    display: flex;
+    gap: 2%;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
