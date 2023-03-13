@@ -1,2 +1,2 @@
 # scandiweb-test-task
-A test task for junior web developer position at scandiweb.
+A test task for a junior web developer position at scandiweb.
