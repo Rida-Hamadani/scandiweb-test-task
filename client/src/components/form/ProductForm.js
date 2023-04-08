@@ -150,17 +150,17 @@ class ProductForm extends Component {
                     onChange={this.takeInput}
                 >
                     <option value="Type" disabled hidden>Type</option>
-                    <option value="dvd">DVD</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="book">Book</option>
+                    <option value="DVD">DVD</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Book">Book</option>
 
                 </select>
 
             </div>
 
-            {type === 'dvd' && this.dvdForm()}
-            {type === 'furniture' && this.furnitureForm()}
-            {type === 'book' && this.bookForm()}
+            {type === 'Dvd' && this.dvdForm()}
+            {type === 'Furniture' && this.furnitureForm()}
+            {type === 'Book' && this.bookForm()}
 
             {response && response.errors && 
 

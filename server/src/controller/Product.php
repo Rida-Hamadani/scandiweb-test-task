@@ -1,18 +1,9 @@
 <?php
 
 namespace controller;
+use service\ProductServices;
 
-class Product extends \model\Product {
-
-    private \model\Product $gateway;
-
-    public function __construct(\model\Product $gateway) {
-
-        // Cannot use construct property promotion in PHP7
-
-        $this->gateway = $gateway;
-
-    }
+class Product extends ProductServices {
 
     public function processRequest(string $method): void {
 
@@ -20,7 +11,7 @@ class Product extends \model\Product {
 
             case 'GET':
 
-                echo(json_encode($this->gateway->getAll()));
+                echo(json_encode($this->getAll()));
 
                 break;
 
@@ -65,7 +56,7 @@ class Product extends \model\Product {
 
         foreach ($products as $sku) {
 
-            $this->gateway->delete($sku);
+            $this->delete($sku);
 
         }
 
@@ -73,19 +64,7 @@ class Product extends \model\Product {
 
     private function createProduct(array $properties): void {
 
-        unset($properties['type']);
-
-        if (isset($properties['height'])) {
-
-            $dimensions = $properties['height'] . 'x' . $properties['width'] . 'x' . $properties['height'];
-
-            $properties['dimensions'] = $dimensions;
-
-            unset($properties['height']);
-            unset($properties['width']);
-            unset($properties['height']);
-
-        }
+        $product = "\\model\\" . $properties['type'];
 
         $this->gateway->create($properties);
 

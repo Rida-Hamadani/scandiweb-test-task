@@ -32,7 +32,7 @@ class Main {
 
         case 'products':
 
-            $productGateway = new \model\Product($this->database);
+            $productGateway = new \service\ProductServices($this->database);
 
             $productController = new \controller\Product($productGateway);
 
