@@ -1,95 +1,92 @@
 <?php
 
 namespace model;
-use core\Database;
-use PDO;
+use service\ProductServices;
 
-class Product extends Database {
+abstract class Product extends ProductServices {
 
-    private PDO $connection;
+    // Products common properties
 
-    public function __construct(Database $database) {
+    protected string $sku;
+    protected string $name;
+    protected string $price;
+    protected ProductServices $services;
 
-        $this->connection = $database->getConnection();
+    public function __construct(string $sku, 
+                                string $name, 
+                                string $price, 
+                                ProductServices $services) {
 
-    }
+        // Cannot use construct property promotion in PHP7
 
-    // Get the list of all products
-
-    protected function getAll(): array {
-
-        $sql = "SELECT * 
-                FROM products;";
-
-        $statement = $this->connection->query($sql);
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    }
-
-    // Create new product
-
-    protected function create(array $properties): string {
-
-        $sql = "INSERT INTO products (sku, name, price, size, weight, dimensions)
-                VALUES (:sku, :name, :price, :size, :weight, :dimensions);";
-
-        $statement = $this->connection->prepare($sql);
-
-        foreach (['sku', 'name', 'price', 'size', 'weight', 'dimensions'] as $key) {
-
-            if (array_key_exists($key, $properties)) {
-
-                $statement->bindValue(':' . $key, $properties[$key], PDO::PARAM_STR);
-
-            } else {
-
-                $statement->bindValue(':' . $key, null, PDO::PARAM_NULL);
-
-            }
-            
-        }
-
-        $statement->execute();
-
-        return $this->connection->lastInsertId();
+        $this->sku = $sku;
+        $this->name = $name;
+        $this->price = $price;
+        $this->gateway = $gateway;
 
     }
 
-    // Check if SKU is taken
+    // Getters
 
-    protected function isSkuTaken(string $sku): bool {
+    protected function getSku(): string {
 
-        $sql = "SELECT sku
-                FROM products
-                WHERE sku = :sku;";
-        
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(":sku", $sku, PDO::PARAM_STR);
-        $statement->execute();
-
-        if ($statement->rowCount() !== 0) {
-
-            return true;
-
-        }
-
-        return false;
+        return $this->sku;
 
     }
 
-    // Delete product from database
+    protected function getName(): string {
 
-    protected function delete(string $sku): int {
+        return $this->name;
 
-        $sql = "DELETE FROM products
-               WHERE sku=:sku;";
-
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(':sku', $sku, PDO::PARAM_STR);
-        $statement->execute();
-
-        return $statement->rowCount(); 
     }
-    
+
+    protected function getPrice(): string {
+
+        return $this->price;
+
+    }
+
+    abstract protected function getSpecificProperty(): string;
+
+    // Setters
+
+    protected function setSku($sku) {
+
+        $this->sku = $sku;
+
+    }
+
+    protected function setName($name) {
+
+        $this->name = $name;
+
+    }
+
+    protected function setPrice($price) {
+
+        $this->price = $price;
+
+    }
+
+    abstract protected function setSpecificProperty($property);
+
+    public function save(): string {
+
+        return $this->services->save(
+
+            $this->getSku(),
+            $this->getName(),
+            $this->getPrice(),
+            $this->getSpecificProperty()
+
+        );
+
+    }
+
+    public function delete(): int {
+
+        return $this->services->delete($this->getSku());
+
+    }
+
 }
