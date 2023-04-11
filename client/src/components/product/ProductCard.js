@@ -5,7 +5,7 @@ class ProductCard extends Component {
 
     render() {
 
-        const { sku, name, price, weight, size, dimensions, onCheckboxChange, checked} = this.props;
+        const { sku, name, price, property, onCheckboxChange, checked} = this.props;
 
         return (
 
@@ -17,9 +17,7 @@ class ProductCard extends Component {
                     <p>{sku}</p>
                     <p>{name}</p>
                     <p>{price} $</p>
-                    {weight && <p>weight: {weight} KG</p>}
-                    {size && <p>size: {size} MB</p>}
-                    {dimensions && <p>dimensions: {dimensions}</p>}
+                    <p>{property}</p>
                 </div>
             </div>
 

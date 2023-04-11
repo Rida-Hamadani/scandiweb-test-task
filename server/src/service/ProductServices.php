@@ -2,9 +2,10 @@
 
 namespace service;
 use core\Database;
+use model\Product;
 use PDO;
 
-class Product extends Database {
+class ProductServices {
 
     private PDO $connection;
 
@@ -16,7 +17,7 @@ class Product extends Database {
 
     // Get the list of all products
 
-    protected function getAll(): array {
+    public function getAll(): array {
 
         $sql = "SELECT * 
                 FROM products;";
@@ -29,17 +30,17 @@ class Product extends Database {
 
     // Create new product
 
-    protected function create(string $sku, string $name, string $price, string $property): string {
+    public function create(Product $product): string {
 
         $sql = "INSERT INTO products (sku, name, price, property)
                 VALUES (:sku, :name, :price, :property);";
 
         $statement = $this->connection->prepare($sql);
 
-        $statement->bindValue(':sku', $sku, PDO::PARAM_STR);
-        $statement->bindValue(':name', $name, PDO::PARAM_STR);
-        $statement->bindValue(':price', $price, PDO::PARAM_STR);
-        $statement->bindValue(':property', $property, PDO::PARAM_STR);
+        $statement->bindValue(':sku', $product->getSku(), PDO::PARAM_STR);
+        $statement->bindValue(':name', $product->getName(), PDO::PARAM_STR);
+        $statement->bindValue(':price', $product->getPrice(), PDO::PARAM_STR);
+        $statement->bindValue(':property', $product->getSpecificProperty(), PDO::PARAM_STR);
 
         $statement->execute();
 
@@ -49,7 +50,7 @@ class Product extends Database {
 
     // Check if SKU is taken
 
-    protected function isSkuTaken(string $sku): bool {
+    public function isSkuTaken(string $sku): bool {
 
         $sql = "SELECT sku
                 FROM products
@@ -71,7 +72,7 @@ class Product extends Database {
 
     // Delete product from database
 
-    protected function delete(string $sku): int {
+    public function delete(string $sku): int {
 
         $sql = "DELETE FROM products
                WHERE sku=:sku;";

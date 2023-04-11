@@ -19,7 +19,7 @@ class Database {
 
     }
 
-    protected function getConnection(): PDO {
+    public function getConnection(): PDO {
 
         $dsn = 'mysql:' . http_build_query($this->config, '', ';');
 

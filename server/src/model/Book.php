@@ -1,32 +1,27 @@
 <?php
 
 namespace model;
-use Product;
-use service\ProductServices;
+use model\Product;
 
 class Book extends Product {
 
-    protected string $weight;
+    private string $weight;
 
-    public function __construct(string $sku,
-                                string $name, 
-                                string $price, 
-                                array $properties,
-                                ProductServices $services) {
+    public function __construct(array $properties) {
 
-        parent::__construct($sku, $name, $price, $services);
+        parent::__construct($properties["sku"], $properties["name"], $properties["price"]);
         
         $this->weight = $properties["weight"];
 
     }
 
-    protected function getSpecificProperty(): string {
+    public function getSpecificProperty(): string {
 
-        return "weight: " . $this->weight . " KG";
+        return "Weight: " . $this->weight . " KG";
 
     }
 
-    protected function setSpecificProperty($weight) {
+    public function setSpecificProperty($weight) {
 
         $this->weight = $weight;
 

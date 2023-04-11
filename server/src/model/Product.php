@@ -1,92 +1,69 @@
 <?php
 
 namespace model;
-use service\ProductServices;
 
-abstract class Product extends ProductServices {
+abstract class Product {
 
     // Products common properties
 
-    protected string $sku;
-    protected string $name;
-    protected string $price;
-    protected ProductServices $services;
+    private string $sku;
+    private string $name;
+    private string $price;
+
 
     public function __construct(string $sku, 
                                 string $name, 
-                                string $price, 
-                                ProductServices $services) {
+                                string $price) {
 
         // Cannot use construct property promotion in PHP7
 
         $this->sku = $sku;
         $this->name = $name;
         $this->price = $price;
-        $this->gateway = $gateway;
 
     }
 
     // Getters
 
-    protected function getSku(): string {
+    public function getSku(): string {
 
         return $this->sku;
 
     }
 
-    protected function getName(): string {
+    public function getName(): string {
 
         return $this->name;
 
     }
 
-    protected function getPrice(): string {
+    public function getPrice(): string {
 
         return $this->price;
 
     }
 
-    abstract protected function getSpecificProperty(): string;
+    abstract public function getSpecificProperty(): string;
 
     // Setters
 
-    protected function setSku($sku) {
+    public function setSku($sku) {
 
         $this->sku = $sku;
 
     }
 
-    protected function setName($name) {
+    public function setName($name) {
 
         $this->name = $name;
 
     }
 
-    protected function setPrice($price) {
+    public function setPrice($price) {
 
         $this->price = $price;
 
     }
 
-    abstract protected function setSpecificProperty($property);
-
-    public function save(): string {
-
-        return $this->services->save(
-
-            $this->getSku(),
-            $this->getName(),
-            $this->getPrice(),
-            $this->getSpecificProperty()
-
-        );
-
-    }
-
-    public function delete(): int {
-
-        return $this->services->delete($this->getSku());
-
-    }
-
+    abstract public function setSpecificProperty($property);
 }
