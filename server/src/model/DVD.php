@@ -1,32 +1,27 @@
 <?php
 
 namespace model;
-use Product;
-use service\ProductServices;
+use model\Product;
 
 class DVD extends Product {
 
-    protected string $size;
+    private string $size;
 
-    public function __construct(string $sku,
-                                string $name, 
-                                string $price, 
-                                array $properties,
-                                ProductServices $services) {
+    public function __construct(array $properties) {
 
-        parent::__construct($sku, $name, $price, $services);
+        parent::__construct($properties["sku"], $properties["name"], $properties["price"]);
         
-        $this->dimensions = $properties["size"];
+        $this->size = $properties["size"];
 
     }
 
-    protected function getSpecificProperty(): string {
+    public function getSpecificProperty(): string {
 
-        return "size: " . $this->size . " MB";
+        return "Size: " . $this->size . " MB";
 
     }
 
-    protected function setSpecificProperty($size) {
+    public function setSpecificProperty($size) {
 
         $this->size = $size;
 

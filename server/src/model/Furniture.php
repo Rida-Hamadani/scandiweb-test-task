@@ -1,32 +1,27 @@
 <?php
 
 namespace model;
-use Product;
-use service\ProductServices;
+use model\Product;
 
 class Furniture extends Product {
 
-    protected string $dimensions;
+    private string $dimensions;
 
-    public function __construct(string $sku,
-                                string $name, 
-                                string $price, 
-                                array $properties,
-                                ProductServices $services) {
+    public function __construct(array $properties) {
 
-        parent::__construct($sku, $name, $price, $services);
+        parent::__construct($properties["sku"], $properties["name"], $properties["price"]);
         
-        $this->dimensions = $properties["dimensions"];
+        $this->dimensions = $properties["height"] . 'x' . $properties["length"] . 'x' . $properties["width"];
 
     }
 
-    protected function getSpecificProperty(): string {
+    public function getSpecificProperty(): string {
 
-        return "dimensions: " . $this->dimensions;
+        return "Dimensions: " . $this->dimensions;
 
     }
 
-    protected function setSpecificProperty($dimensions) {
+    public function setSpecificProperty($dimensions) {
 
         $this->dimensions = $dimensions;
 

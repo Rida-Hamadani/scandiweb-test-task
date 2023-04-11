@@ -158,7 +158,7 @@ class ProductForm extends Component {
 
             </div>
 
-            {type === 'Dvd' && this.dvdForm()}
+            {type === 'DVD' && this.dvdForm()}
             {type === 'Furniture' && this.furnitureForm()}
             {type === 'Book' && this.bookForm()}
 

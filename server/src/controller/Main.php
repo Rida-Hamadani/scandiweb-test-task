@@ -34,7 +34,7 @@ class Main {
 
             $productGateway = new \service\ProductServices($this->database);
 
-            $productController = new \controller\Product($productGateway);
+            $productController = new \controller\ProductController($productGateway);
 
             $productController->processRequest($_SERVER['REQUEST_METHOD']);
 

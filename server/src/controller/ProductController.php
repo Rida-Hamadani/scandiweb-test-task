@@ -3,7 +3,15 @@
 namespace controller;
 use service\ProductServices;
 
-class Product extends ProductServices {
+class ProductController {
+
+    private ProductServices $services;
+
+    public function __construct(ProductServices $services) {
+
+        $this->services = $services;
+
+    }
 
     public function processRequest(string $method): void {
 
@@ -11,7 +19,7 @@ class Product extends ProductServices {
 
             case 'GET':
 
-                echo(json_encode($this->getAll()));
+                echo(json_encode($this->services->getAll()));
 
                 break;
 
@@ -56,22 +64,18 @@ class Product extends ProductServices {
 
         foreach ($products as $sku) {
 
-            $this->delete($sku);
+            $this->services->delete($sku);
 
         }
 
     }
 
-    private function createProduct(array $properties): void {
+    private function createProduct(array $data): void {
 
-        $cname = "\\model\\" . $properties['type'];
-
-        $product = new $cname;
-
-        $this->gateway->create($properties);
-
+        $productType = "\\model\\" . $data['type'];
+        $product = new $productType($data);
+        $this->services->create($product);
         echo(json_encode(['messages' => 'success']));
-
     }
 
     private function getValidationErrors($data): array {
@@ -108,7 +112,7 @@ class Product extends ProductServices {
 
         }
 
-        if ($this->gateway->isSkuTaken($data['sku'])) {
+        if ($this->services->isSkuTaken($data['sku'])) {
 
             $errors[] = 'Please, provide a unique SKU';
 

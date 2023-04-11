@@ -53,7 +53,7 @@ class AddProduct extends Component {
       value !== '' && params.append(key, value);
     }
 
-    fetch('https://localhost:8888/products', {
+    fetch('http://localhost:8888/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
